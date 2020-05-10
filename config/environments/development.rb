@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -52,6 +54,9 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+
+  config.action_mailer.default_url_options = { host: 'localhost:3000' } # 追加
+  config.action_mailer.delivery_method = :letter_opener_web # 追加
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
