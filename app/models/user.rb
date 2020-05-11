@@ -37,6 +37,6 @@ class User < ApplicationRecord
   # Validations
   # --------------------------------------------------------------------------------
   validates :screen_name, presence: true, uniqueness: true, length: { in: 5..20 }
-  validates :screen_name, ban_reserved: true
+  validates :screen_name, ban_reserved: true, uniqueness: { case_sensitive: false }
   validates :biography, length: { maximum: 140 }
 end
