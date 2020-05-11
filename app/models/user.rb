@@ -38,5 +38,7 @@ class User < ApplicationRecord
   # --------------------------------------------------------------------------------
   validates :screen_name, presence: true, uniqueness: true, length: { in: 5..20 }
   validates :screen_name, ban_reserved: true, uniqueness: { case_sensitive: false }
+  validates :screen_name, format: { with: /\A[a-zA-Z0-9]+\z/ }
+  validates :name, presence: true, length: { in: 1..140 }
   validates :biography, length: { maximum: 140 }
 end
