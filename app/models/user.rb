@@ -41,4 +41,5 @@ class User < ApplicationRecord
   validates :screen_name, format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :name, presence: true, length: { in: 1..140 }
   validates :biography, length: { maximum: 140 }
+  has_many :tweets
 end
