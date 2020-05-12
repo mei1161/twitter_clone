@@ -5,3 +5,8 @@
     %li= @user.biography
   -if @user.birthday.present?
     %li= @user.birthday
+
+- pp @tweets
+- @tweets.each do |tweet|
+  %p= tweet.content
+  
