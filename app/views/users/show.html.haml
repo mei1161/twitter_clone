@@ -1,0 +1,7 @@
+%ul
+  %li= @user.name
+  %li= @user.screen_name
+  -if @user.biography.present?
+    %li= @user.biography
+  -if @user.birthday.present?
+    %li= @user.birthday
