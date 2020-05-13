@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: tweets
@@ -16,7 +14,7 @@
 #  index_tweets_on_user_id  (user_id)
 #
 
-class Tweet < ApplicationRecord
+class TweetImage < Tweet
   validates :content, presence: true, length: { maximum: 140 }
   belongs_to :user
   has_one :image
