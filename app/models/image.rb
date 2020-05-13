@@ -16,6 +16,6 @@
 #
 
 class Image < ApplicationRecord
-  mount_uploader :image, ImagesUploader
+  mount_uploader :image, ImageUploader
   belongs_to :tweet
 end
