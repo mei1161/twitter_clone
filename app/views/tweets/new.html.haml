@@ -3,4 +3,8 @@
     = f.label :content
     %br
     = f.text_area :content, rows: 10
+  .form-group
+    = f.label :image
+    %br
+    = f.file_field :image
   = f.submit '登録する'

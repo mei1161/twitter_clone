@@ -4,6 +4,7 @@ class TweetsController < ApplicationController
   before_action :authenticate_user!
   def new
     @tweet = Tweet.new
+    @tweet.build_image
   end
 
   def create
@@ -22,6 +23,6 @@ class TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, image_attribute: %i[id image])
   end
 end
