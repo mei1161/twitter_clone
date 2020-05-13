@@ -236,3 +236,5 @@ build-iPhoneSimulator/
 .history
 
 # End of https://www.gitignore.io/api/node,ruby,rails,visualstudiocode
+
+public/uploads/*
