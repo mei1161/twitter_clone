@@ -17,6 +17,6 @@
 class TweetImage < Tweet
   validates :content, presence: true, length: { maximum: 140 }
   belongs_to :user
-  has_one :image
+  has_one :image, foreign_key: :tweet_id
   accepts_nested_attributes_for :image, allow_destroy: true
 end

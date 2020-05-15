@@ -3,8 +3,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find_by!(screen_name: params[:id])
-    @tweets = @user.tweets
-    @tweet = Tweet.new
+    @tweet = TweetImage.new
     @tweet.build_image
   end
 end

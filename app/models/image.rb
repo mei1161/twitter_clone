@@ -17,5 +17,5 @@
 
 class Image < ApplicationRecord
   mount_uploader :image, ImageUploader
-  belongs_to :tweet
+  belongs_to :tweet_image, foreign_key: :tweet_id
 end
