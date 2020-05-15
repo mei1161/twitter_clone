@@ -21,4 +21,4 @@
 - @tweets.each do |tweet|
   %p= tweet.content
   - if tweet.type === "TweetImage"
-    - pp "HelloWorld"
+    = image_tag tweet.image.image.to_s 
