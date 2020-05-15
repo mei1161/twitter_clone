@@ -5,5 +5,6 @@ class UsersController < ApplicationController
     @user = User.find_by!(screen_name: params[:id])
     @tweet = TweetImage.new
     @tweet.build_image
+    @tweets = @user.tweets
   end
 end

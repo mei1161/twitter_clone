@@ -17,4 +17,8 @@
     %li= @user.biography
   -if @user.birthday.present?
     %li= @user.birthday
-    
+
+- @tweets.each do |tweet|
+  %p= tweet.content
+  - if tweet.type === "TweetImage"
+    - pp "HelloWorld"

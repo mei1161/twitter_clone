@@ -4,7 +4,7 @@ class CreateImages < ActiveRecord::Migration[6.0]
   def change
     create_table :images do |t|
       t.string :image
-      t.references :tweet_image
+      t.references :tweet
       t.timestamps
     end
   end
