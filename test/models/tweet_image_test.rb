@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: tweets
@@ -16,7 +14,10 @@
 #  index_tweets_on_user_id  (user_id)
 #
 
-class Tweet < ApplicationRecord
-  validates :content, presence: true, length: { maximum: 140 }
-  belongs_to :user
+require 'test_helper'
+
+class TweetImageTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end
