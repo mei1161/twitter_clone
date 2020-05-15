@@ -17,7 +17,7 @@ class TweetsController < ApplicationController
     end
 
     @tweet.user = @user
-    if @tweet.save!
+    if @tweet.save
       redirect_to user_path(current_user.screen_name)
     else
       @tweets = @user.tweets
