@@ -9,7 +9,6 @@
 #  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  retweet_id :integer
 #  user_id    :bigint
 #
 # Indexes
@@ -18,6 +17,7 @@
 #
 
 class Tweet < ApplicationRecord
-  validates :content, presence: true, length: { maximum: 140 }
+  validates :content, length: { maximum: 140 }
   belongs_to :user
+  has_many :retweets
 end

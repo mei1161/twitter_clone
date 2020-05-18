@@ -10,18 +10,18 @@ class TweetsController < ApplicationController
   def create
     @user = current_user
 
-    if params[:tweet_image][:image_attributes].present?
-      @tweet = TweetImage.new(tweet_image_params)
-    else
-      @tweet = TweetText.new(tweet_text_params)
-    end
+    @tweet = if params[:tweet_image][:image_attributes].present?
+               TweetImage.new(tweet_image_params)
+             else
+               TweetText.new(tweet_text_params)
+             end
 
     @tweet.user = @user
     if @tweet.save
       redirect_to user_path(current_user.screen_name)
     else
       @tweets = @user.tweets
-      
+
       @tweet.becomes(TweetImage)
 
       render 'users/show'

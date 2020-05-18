@@ -19,6 +19,9 @@
     %li= @user.birthday
 
 - @tweets.each do |tweet|
+  - if tweet.type == "TweetRetweet"
+    - tweet = @tweets.find(tweet.retweet.retweet_id)
   %p= tweet.content
-  - if tweet.type === "TweetImage"
-    = image_tag tweet.image.image.to_s 
+  - if tweet.type == "TweetImage"
+    = image_tag tweet.image.image.to_s
+  = button_to "リツイート", retweet_path(tweet.id), method: :get

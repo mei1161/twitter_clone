@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tweets
@@ -14,9 +16,8 @@
 #  index_tweets_on_user_id  (user_id)
 #
 
-class TweetImage < Tweet
-  validates :content, presence: true, length: { maximum: 140 }
+
+class TweetRetweet < Tweet
   belongs_to :user
-  has_one :image, foreign_key: :tweet_id
-  accepts_nested_attributes_for :image, allow_destroy: true
+  has_one :retweet, foreign_key: :tweet_id
 end
