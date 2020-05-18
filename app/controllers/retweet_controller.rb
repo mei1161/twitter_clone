@@ -3,6 +3,10 @@
 class RetweetController < ApplicationController
   before_action :authenticate_user!
   def show
+    if current_user.retweets.exists?(retweet_id: params[:id])
+      redirect_to user_path(current_user.screen_name)
+      return
+    end
     @tweet_retweet = TweetRetweet.new
     @retweet = Retweet.new
     @retweet.retweet_id = params[:id]

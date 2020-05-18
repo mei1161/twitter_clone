@@ -17,11 +17,14 @@
     %li= @user.biography
   -if @user.birthday.present?
     %li= @user.birthday
-
-- @tweets.each do |tweet|
-  - if tweet.type == "TweetRetweet"
-    - tweet = @tweets.find(tweet.retweet.retweet_id)
-  %p= tweet.content
-  - if tweet.type == "TweetImage"
-    = image_tag tweet.image.image.to_s
-  = button_to "リツイート", retweet_path(tweet.id), method: :get
+%ul
+  - @tweets.reverse_each do |tweet|
+    - if tweet.type == "TweetRetweet"
+      retweet
+      - tweet = @tweets.find(tweet.retweet.retweet_id)
+    %li
+      %p= tweet.content
+    - if tweet.type == "TweetImage"
+      = image_tag tweet.image.image.to_s
+    - unless @retweets.exists?(retweet_id: tweet.id)
+      = button_to "リツイート", retweet_path(tweet.id), method: :get
