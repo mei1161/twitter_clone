@@ -16,8 +16,7 @@
 #  index_tweets_on_user_id  (user_id)
 #
 
-
 class TweetRetweet < Tweet
   belongs_to :user
-  has_one :retweet, foreign_key: :tweet_id
+  has_one :retweet, foreign_key: :retweet_id
 end
