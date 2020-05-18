@@ -42,4 +42,6 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { in: 1..140 }
   validates :biography, length: { maximum: 140 }
   has_many :tweets
+  has_many :tweet_retweets
+  has_many :retweets, through: :tweet_retweets, source: :retweet
 end

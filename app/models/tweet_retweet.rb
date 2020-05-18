@@ -16,8 +16,7 @@
 #  index_tweets_on_user_id  (user_id)
 #
 
-class Tweet < ApplicationRecord
-  validates :content, length: { maximum: 140 }
+class TweetRetweet < Tweet
   belongs_to :user
-  has_many :retweets
+  has_one :retweet, foreign_key: :retweet_id
 end
