@@ -21,8 +21,8 @@ class TweetsController < ApplicationController
       redirect_to user_path(current_user.screen_name)
     else
       @tweets = @user.tweets
-
-      @tweet.becomes(TweetImage)
+      @tweet.build_image
+      @retweets = current_user.retweets
 
       render 'users/show'
     end
