@@ -28,3 +28,5 @@
       = image_tag tweet.image.image.to_s
     - unless @retweets.exists?(retweet_id: tweet.id)
       = button_to "リツイート", retweet_path(tweet.id), method: :get
+    - else
+      = button_to "リツイートを削除する",retweet_path(tweet.id), method: :delete

@@ -9,4 +9,10 @@ class UsersController < ApplicationController
     @tweets = @user.tweets
     @retweets = current_user.retweets
   end
+
+  def destroy
+    @retweet = current_user.retweets.find(retweet_id: params[:id])
+    @retweet.destroy
+    redirect_to user_path(current_user.screen_name)
+  end
 end

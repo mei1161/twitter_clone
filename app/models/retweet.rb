@@ -13,5 +13,5 @@
 
 class Retweet < ApplicationRecord
   belongs_to :tweet, class_name: 'Tweet', foreign_key: :tweet_id
-  belongs_to :tweet_retweet, class_name: 'Tweet', foreign_key: :tweet_id, optional: true
+  belongs_to :tweet_retweet, class_name: 'Tweet', foreign_key: :tweet_id, optional: true, dependent: :destroy
 end
