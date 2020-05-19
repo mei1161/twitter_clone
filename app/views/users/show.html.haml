@@ -19,14 +19,9 @@
     %li= @user.birthday
 %ul
   - @tweets.reverse_each do |tweet|
+    - if tweet.reply.present?
+      - next
     - if tweet.type == "TweetRetweet"
       retweet
       - tweet = tweet.retweet.tweet
-    %li
-      %p= tweet.content
-    - if tweet.type == "TweetImage"
-      = image_tag tweet.image.image.to_s
-    - unless @retweets.exists?(tweet_id: tweet.id)
-      = button_to "リツイート", retweet_path(tweet.id), method: :get
-    - else
-      = button_to "リツイートを削除する",retweet_path(tweet.id), method: :delete
+    = render partial: "tweet",locals: { tweet: tweet }

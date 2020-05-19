@@ -21,6 +21,7 @@ class TweetsController < ApplicationController
       redirect_to user_path(current_user.screen_name)
     else
       @tweets = @user.tweets
+      @tweet = @tweet.becomes(TweetImage)
       @tweet.build_image
       @retweets = current_user.retweets
 
@@ -31,10 +32,10 @@ class TweetsController < ApplicationController
   private
 
   def tweet_image_params
-    params.require(:tweet_image).permit(:content, image_attributes: %i[image tweet_id])
+    params.require(:tweet_image).permit(:content, :reply_id, image_attributes: %i[image tweet_id])
   end
 
   def tweet_text_params
-    params.require(:tweet_image).permit(:content)
+    params.require(:tweet_image).permit(:content, :reply_id)
   end
 end
