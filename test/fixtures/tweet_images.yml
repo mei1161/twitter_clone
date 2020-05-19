@@ -7,6 +7,7 @@
 #  type       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  reply_id   :bigint
 #  user_id    :bigint
 #
 # Indexes
