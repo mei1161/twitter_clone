@@ -44,4 +44,5 @@ class User < ApplicationRecord
   has_many :tweets
   has_many :tweet_retweets
   has_many :retweets, through: :tweet_retweets, source: :retweet
+  has_many :likes
 end
