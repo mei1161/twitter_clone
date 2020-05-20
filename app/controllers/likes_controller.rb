@@ -12,7 +12,6 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    pp current_user.likes
     @like = current_user.likes.find_by(tweet_id: params[:tweet_id])
     @like.destroy
     redirect_to user_path(current_user.screen_name)
