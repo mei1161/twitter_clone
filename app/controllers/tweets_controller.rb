@@ -24,6 +24,7 @@ class TweetsController < ApplicationController
       @tweet = @tweet.becomes(TweetImage)
       @tweet.build_image
       @retweets = current_user.retweets
+      @likes = current_user.likes
 
       render 'users/show'
     end

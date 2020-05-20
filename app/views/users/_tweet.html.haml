@@ -18,6 +18,10 @@
     = button_to "リツイート", retweet_path(tweet.id), method: :get
   - else
     = button_to "リツイートを削除する",retweet_path(tweet.id), method: :delete
+  - unless tweet.likes.exists?(tweet_id: tweet.id)
+    = button_to "LGTM", like_path(tweet_id: tweet.id), method: :post
+  - else
+    = button_to "LGTMを取り消す", like_path(tweet_id: tweet.id), method: :delete
 - if tweet.replies.present?
   - tweet.replies.each do |reply|
     = render partial: "tweet",locals: { tweet: reply }
