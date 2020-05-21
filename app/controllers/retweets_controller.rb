@@ -18,7 +18,7 @@ class RetweetsController < ApplicationController
   end
 
   def destroy
-    @retweet = current_user.retweets.find_by(tweet_id: params[:id])
+    @retweet = current_user.retweets.find_by(tweet_id: params[:tweet_id])
     @retweet.destroy
     redirect_to user_path(current_user.screen_name)
  end
