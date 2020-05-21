@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :tweets
   end
 
-  resources :retweet, only: %i[show destroy]
+  resource :retweet, only: %i[create destroy]
   resource :like, only: %i[create destroy]
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

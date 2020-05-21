@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-class RetweetController < ApplicationController
+class RetweetsController < ApplicationController
   before_action :authenticate_user!
-  def show
-    if current_user.retweets.exists?(tweet_id: params[:id])
+  def create
+    if current_user.retweets.exists?(tweet_id: params[:tweet_id])
       redirect_to user_path(current_user.screen_name)
       return
     end
     @tweet_retweet = TweetRetweet.new
     @retweet = Retweet.new
-    @retweet.tweet_id = params[:id]
+    @retweet.tweet_id = params[:tweet_id]
     @retweet.tweet_retweet = @tweet_retweet
     @tweet_retweet.user = current_user
     @tweet_retweet.save
@@ -18,7 +18,7 @@ class RetweetController < ApplicationController
   end
 
   def destroy
-    @retweet = current_user.retweets.find_by(tweet_id: params[:id])
+    @retweet = current_user.retweets.find_by(tweet_id: params[:tweet_id])
     @retweet.destroy
     redirect_to user_path(current_user.screen_name)
  end
