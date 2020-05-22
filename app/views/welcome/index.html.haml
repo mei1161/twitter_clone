@@ -2,6 +2,7 @@
 
 - if user_signed_in?
   = link_to "プロフィルを編集できるだなも",edit_user_registration_path
+  = link_to "ログアウトするなだも",destroy_user_session_path, method: :delete
   %ul
     - @users.each do |user|
       %li= link_to "#{user.screen_name}のページ",user_path(user.screen_name)
