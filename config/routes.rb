@@ -13,6 +13,12 @@ Rails.application.routes.draw do
     resources :tweets
   end
 
+  resources :users do
+    member do
+      get :likes
+    end
+  end
+
   resource :retweet, only: %i[create destroy]
   resource :like, only: %i[create destroy]
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
