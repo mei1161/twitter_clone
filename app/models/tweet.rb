@@ -20,8 +20,8 @@
 class Tweet < ApplicationRecord
   validates :content, length: { maximum: 140 }
   belongs_to :user
-  has_many :retweets
+  has_many :retweets, dependent: :destroy
   belongs_to :reply, foreign_key: :reply_id, class_name: 'Tweet' ,optional: true
   has_many :replies, foreign_key: :reply_id, class_name: 'Tweet'
-  has_many :likes
+  has_many :likes, dependent: :destroy
 end
