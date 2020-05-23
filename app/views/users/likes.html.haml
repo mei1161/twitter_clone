@@ -7,3 +7,5 @@
   - @like_tweets.each do |like_tweet|
     - tweet = Tweet.find_by(id: like_tweet.id)
     %li= tweet.content
+    - if tweet.type == "TweetImage"
+      = image_tag tweet.image.image.to_s
