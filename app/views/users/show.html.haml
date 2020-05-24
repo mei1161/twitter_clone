@@ -10,6 +10,8 @@
       = ff.file_field :image
   = f.submit '登録する'
 
+= link_to 'いいねのツイート', likes_user_path(current_user.id)
+
 %ul
   %li= @user.name
   %li= @user.screen_name

@@ -9,4 +9,8 @@ class UsersController < ApplicationController
     @tweets = @user.tweets
     @retweets = current_user.retweets
   end
+
+  def likes
+    @like_tweets = current_user.like_tweets
+  end
 end

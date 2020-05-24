@@ -30,6 +30,12 @@ class TweetsController < ApplicationController
     end
   end
 
+  def destroy
+    @tweet = current_user.tweets.find_by(id: params[:tweet_id])
+    @tweet.destroy
+    redirect_to user_path(current_user.screen_name)
+  end
+
   private
 
   def tweet_image_params
