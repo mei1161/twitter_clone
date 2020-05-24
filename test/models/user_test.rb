@@ -8,6 +8,7 @@
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
+#  deleted_at             :datetime
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  name                   :string(140)      not null
@@ -21,6 +22,7 @@
 #
 # Indexes
 #
+#  index_users_on_deleted_at            (deleted_at)
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
