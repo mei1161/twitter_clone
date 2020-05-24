@@ -61,3 +61,4 @@ gem 'dotenv-rails'
 gem 'letter_opener'
 gem 'letter_opener_web'
 gem 'annotate'
+gem "paranoia", "~> 2.2"
