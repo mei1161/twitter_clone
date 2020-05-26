@@ -6,6 +6,16 @@
   %ul
     - @users.each do |user|
       %li= link_to "#{user.screen_name}のページ",user_path(user.screen_name)
+    
+  %ul
+    - @follow_users.each do |follow_user|
+      - @user = User.find_by(id: follow_user)
+      - @user.tweets.order(:created_at).reverse_each do |tweet|
+        %li= tweet.content
 - else
   = link_to "ログインするなだも",user_session_path
+  
+  
+
+
 

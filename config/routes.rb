@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       get :likes
     end
   end
+  resources :follows, only: %i[create destroy]
 
   resource :retweet, only: %i[create destroy]
   resource :like, only: %i[create destroy]

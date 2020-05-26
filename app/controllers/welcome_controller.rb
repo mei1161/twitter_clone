@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class WelcomeController < ApplicationController
+  before_action :authenticate_user!
   def index
     @users = User.all
+    @follow_users = current_user.follows.pluck(:follow_id)
+    @follow_users += [current_user.id]
   end
 
-  def show
-  end
+  def show; end
 end

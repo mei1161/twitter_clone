@@ -44,9 +44,32 @@ class User < ApplicationRecord
   validates :screen_name, format: { with: /\A[a-zA-Z0-9]+\z/ }
   validates :name, presence: true, length: { in: 1..140 }
   validates :biography, length: { maximum: 140 }
+
+  # --------------------------------------------------------------------------------
+  # Relations
+  # --------------------------------------------------------------------------------
   has_many :tweets
   has_many :tweet_retweets
   has_many :retweets, through: :tweet_retweets, source: :retweet
   has_many :likes
   has_many :like_tweets, through: :likes, source: :tweet
+  has_many :follows
+  has_many :followings, through: :follows, source: :follow
+  has_many :reverse_of_follows, class_name: 'Follow', foreign_key: 'follow_id'
+  has_many :followers, through: :reverse_of_follows, source: :user
+
+  def follow(other_user)
+    unless self == other_user
+      follows.find_or_create_by(follow_id: other_user.id)
+    end
+  end
+
+  def unfollow(other_user)
+    follow = follows.find_by(follow_id: other_user.id)
+    follow.destroy if follow.present?
+  end
+
+  def following?(other_user)
+    followings.include?(other_user)
+  end
 end

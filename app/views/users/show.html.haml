@@ -19,6 +19,12 @@
     %li= @user.biography
   -if @user.birthday.present?
     %li= @user.birthday
+- unless current_user == @user
+  - if current_user.following?(@user)
+    = button_to 'フォロー中',follow_path(id: @user.id),method: :delete
+  - else
+    = button_to 'フォローする',follows_path(id: @user.id), method: :post
+  
 %ul
   - @tweets.reverse_each do |tweet|
     - if tweet.reply.present?
@@ -27,3 +33,4 @@
       retweet
       - tweet = tweet.retweet.tweet
     = render partial: "tweet",locals: { tweet: tweet }
+- pp @follow_users
