@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
     @follow_users = current_user.follows.pluck(:follow_id)
     @follow_users += [current_user.id]
     @tweets = Tweet.where(user_id: @follow_users).order(:created_at)
+    @retweets = current_user.retweets
   end
 
   def show; end
