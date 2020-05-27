@@ -9,9 +9,12 @@
     
   %ul
     - @tweets.reverse_each do |tweet|
-      %li= tweet.content
-      - if tweet.type == "TweetImage"
-        = image_tag tweet.image.image.to_s
+    - if tweet.reply.present?
+      - next
+    - if tweet.type == "TweetRetweet"
+      retweet
+      - tweet = tweet.retweet.tweet
+    = render partial: "tweet",locals: { tweet: tweet }
 
 - else
   = link_to "ログインするなだも",user_session_path
