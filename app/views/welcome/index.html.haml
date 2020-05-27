@@ -8,7 +8,6 @@
       %li= link_to "#{user.screen_name}のページ",user_path(user.screen_name)
     
   %ul
-    - @tweets = Tweet.where(user_id: @follow_users).order(:created_at)
     - @tweets.reverse_each do |tweet|
       %li= tweet.content
       - if tweet.type == "TweetImage"
