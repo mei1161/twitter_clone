@@ -32,4 +32,4 @@
     - if tweet.type == "TweetRetweet"
       retweet
       - tweet = tweet.retweet.tweet
-    = render partial: "tweet",locals: { tweet: tweet }
+    = render partial: "shared/tweet",locals: { tweet: tweet }

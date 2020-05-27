@@ -14,7 +14,7 @@
         %br
         = ff.file_field :image
     = f.submit '登録する'
-  - unless @retweets.exists?(id: tweet.id)
+  - unless @retweets.exists?(tweet_id: tweet.id)
     = button_to "リツイート", retweets_path(id: tweet.id), method: :post
   - else
     = button_to "リツイートを削除する",retweet_path(tweet.id), method: :delete
@@ -23,8 +23,7 @@
   - else
     = button_to "LGTMを取り消す", like_path(tweet.id), method: :delete
   - if tweet.user_id == current_user.id
-    - pp tweet
     = button_to "ツイートを削除する", tweet_path(tweet.id), method: :delete
 - if tweet.replies.present?
   - tweet.replies.each do |reply|
-    = render partial: "tweet",locals: { tweet: reply }
+    = render partial: "shared/tweet",locals: { tweet: reply }
