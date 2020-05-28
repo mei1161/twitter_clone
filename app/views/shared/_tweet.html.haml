@@ -1,29 +1,53 @@
-%li
-  %p= tweet.content
-  - if tweet.type == "TweetImage"
-    = image_tag tweet.image.image.to_s
-  = form_with model: TweetImage.new(reply: tweet), url:tweets_path, local: true do |f|
-    .form-group
-      = f.label :content
-      %br
-      = f.text_area :content, rows: 10
-      = f.hidden_field :reply_id
+- if tweet.type == "TweetRetweet"
+  - retweet_user = tweet.user.screen_name
+  - tweet = tweet.retweet.tweet
+
+.card
+  .card-body
+    - if retweet_user.present?
+      %span{class:'badge badge-info'}
+        ="#{retweet_user}さんがRTしました"
+    %h4{class: "card-title"}
+      = tweet.user.screen_name
+    - if tweet.type == "TweetImage"
+      = image_tag tweet.image.image.to_s,style:"width:100%;margin: 0 auto;"
+    
+    %p{class: "card-text"}
+      = tweet.content
+    .btn-group{role: "group"}
+      %button.btn.btn-primary{"type": "button","data-toggle": "collapse", "data-target": "#reply_form_#{tweet.id}", "aria-expanded": "false", "aria-controls": "reply_form_#{tweet.id}"}
+        リプライ
+      - unless tweet.likes.exists?(tweet_id: tweet.id)
+        = button_to "LGTM", likes_path(id: tweet.id), method: :post,class: 'btn btn-outline-primary',form: {style: 'display:inline-block;'}
+      - else
+        = button_to "LGTMを解除する", like_path(tweet.id), method: :delete,class: 'btn btn-primary',form: {style: 'display:inline-block;'}
+      - unless @retweets.exists?(tweet_id: tweet.id)
+        = button_to "リツイート", retweets_path(id: tweet.id), method: :post,class: 'btn btn-outline-primary', form: {style: 'display:inline-block;'}
+      - else
+        = button_to "リツイートを解除する",retweet_path(tweet.id), method: :delete,class: 'btn btn-primary', form: {style: 'display:inline-block;'}
+      - if tweet.user_id == current_user.id
+        = button_to "ツイートを削除する", tweet_path(tweet.id), method: :delete,class: 'btn btn-danger',form: {style: 'display:inline-block;'}
+      
+
+
+.collapse{id: "reply_form_#{tweet.id}"}
+  - reply_tweet = TweetImage.new(reply: tweet)
+  - reply_tweet.build_image
+  = form_with model: reply_tweet, url:tweets_path, local: true do |f|
+    = f.label :content
+    %br
+    = f.text_area :content, rows: 3
+    = f.hidden_field :reply_id
+    %br
     = f.fields_for :image do |ff|
-      .form-group
-        = ff.label :image
-        %br
-        = ff.file_field :image
+      = ff.label :image
+      %br
+      = ff.file_field :image
+    %br
     = f.submit '登録する'
-  - unless @retweets.exists?(tweet_id: tweet.id)
-    = button_to "リツイート", retweets_path(id: tweet.id), method: :post
-  - else
-    = button_to "リツイートを削除する",retweet_path(tweet.id), method: :delete
-  - unless tweet.likes.exists?(tweet_id: tweet.id)
-    = button_to "LGTM", likes_path(id: tweet.id), method: :post
-  - else
-    = button_to "LGTMを取り消す", like_path(tweet.id), method: :delete
-  - if tweet.user_id == current_user.id
-    = button_to "ツイートを削除する", tweet_path(tweet.id), method: :delete
+
+
 - if tweet.replies.present?
   - tweet.replies.each do |reply|
-    = render partial: "shared/tweet",locals: { tweet: reply }
+    .container
+      = render partial: "shared/tweet",locals: { tweet: reply }
