@@ -1,5 +1,6 @@
 .container
   = form_with model: @tweet, url:tweets_path, local: true do |f|
+    = render 'users/shared/error_messages', model: @tweet
     .form-group
       = f.label :content
       %br
