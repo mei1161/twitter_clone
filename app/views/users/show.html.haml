@@ -1,35 +1,39 @@
-= form_with model: @tweet, url:tweets_path, local: true do |f|
-  .form-group
-    = f.label :content
-    %br
-    = f.text_area :content, rows: 10
-  = f.fields_for :image do |ff|
+.container
+  = link_to ' ホームに戻る',root_path,class: 'btn btn-primary'
+  = form_with model: @tweet, url:tweets_path, local: true do |f|
+    = render 'users/shared/error_messages', model: @tweet
     .form-group
-      = ff.label :image
+      = f.label :content
       %br
-      = ff.file_field :image
-  = f.submit '登録する'
+      = f.text_area :content, rows: 10, class: 'form-control'
+    = f.fields_for :image do |ff|
+      .form-group
+        = ff.label :image
+        %br
+        = ff.file_field :image
+    = f.submit 'ツイートする',class: 'btn btn-primary'
+  %p
+  = link_to 'いいねのツイート', likes_user_path(current_user.id),class: 'btn btn-primary'
 
-= link_to 'いいねのツイート', likes_user_path(current_user.id)
+  .media
+    .media-body
+      %h4.mt-0= @user.name
+      %h5.mt-0= "@#{@user.screen_name}"
+      -if @user.birthday.present?
+        = @user.birthday
+      %br
+      -if @user.biography.present?
+        = @user.biography
 
-%ul
-  %li= @user.name
-  %li= @user.screen_name
-  -if @user.biography.present?
-    %li= @user.biography
-  -if @user.birthday.present?
-    %li= @user.birthday
-- unless current_user == @user
-  - if current_user.following?(@user)
-    = button_to 'フォロー中',follow_path(id: @user.id),method: :delete
-  - else
-    = button_to 'フォローする',follows_path(id: @user.id), method: :post
-  
-%ul
+
+  - unless current_user == @user
+    - if current_user.following?(@user)
+      = button_to 'フォロー中',follow_path(id: @user.id),method: :delete
+    - else
+      = button_to 'フォローする',follows_path(id: @user.id), method: :post
+    
+
   - @tweets.reverse_each do |tweet|
     - if tweet.reply.present?
       - next
-    - if tweet.type == "TweetRetweet"
-      retweet
-      - tweet = tweet.retweet.tweet
     = render partial: "shared/tweet",locals: { tweet: tweet }

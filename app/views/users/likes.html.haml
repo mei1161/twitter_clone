@@ -1,11 +1,9 @@
-%h1 like_tweets
+.container
+  %h1 like_tweets
 
-= link_to 'ユーザーのページに戻る',user_path(current_user.screen_name)
+  = link_to 'ユーザーのページに戻る',user_path(current_user.screen_name), class: 'btn btn-info'
 
-
-%ul
+  %p
   - @like_tweets.each do |like_tweet|
     - tweet = Tweet.find_by(id: like_tweet.id)
-    %li= tweet.content
-    - if tweet.type == "TweetImage"
-      = image_tag tweet.image.image.to_s
+    = render partial: "shared/tweet",locals: { tweet: tweet }

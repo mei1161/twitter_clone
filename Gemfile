@@ -62,3 +62,6 @@ gem 'letter_opener'
 gem 'letter_opener_web'
 gem 'annotate'
 gem "paranoia", "~> 2.2"
+gem 'uglifier'
+gem 'jquery-rails'
+gem 'bootstrap'
