@@ -65,3 +65,4 @@ gem "paranoia", "~> 2.2"
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'bootstrap'
+gem 'activeadmin'
