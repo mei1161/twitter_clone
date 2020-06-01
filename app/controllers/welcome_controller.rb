@@ -8,6 +8,8 @@ class WelcomeController < ApplicationController
     @follow_users += [current_user.id]
     @tweets = Tweet.where(user_id: @follow_users).order(:created_at)
     @retweets = current_user.retweets
+    @tweet = TweetImage.new
+    @tweet.build_image
   end
 
   def show; end

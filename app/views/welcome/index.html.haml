@@ -7,6 +7,22 @@
       - @users.each do |user|
         %li.list-group-item= link_to "#{user.screen_name}のページ",user_path(user.screen_name)
     %p
+    .card
+      .container
+        = form_with model: @tweet, url:tweets_path, local: true do |f|
+          %p
+          .form-group
+            = f.label :content
+            %br
+            = f.text_area :content, rows: 10, class: 'form-control'
+          = f.fields_for :image do |ff|
+            .form-group
+              = ff.label :image
+              %br
+              = ff.file_field :image
+          = f.submit 'ツイートする',class: 'btn btn-primary'
+          %p
+    %p
     - @tweets.reverse_each do |tweet|
       - if tweet.reply.present?
         - next

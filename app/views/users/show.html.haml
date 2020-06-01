@@ -1,19 +1,22 @@
 .container
   = link_to ' ホームに戻る',root_path,class: 'btn btn-primary'
-  = form_with model: @tweet, url:tweets_path, local: true do |f|
-    = render 'users/shared/error_messages', model: @tweet
-    .form-group
-      = f.label :content
-      %br
-      = f.text_area :content, rows: 10, class: 'form-control'
-    = f.fields_for :image do |ff|
-      .form-group
-        = ff.label :image
-        %br
-        = ff.file_field :image
-    = f.submit 'ツイートする',class: 'btn btn-primary'
   %p
-  = link_to 'いいねのツイート', likes_user_path(current_user.id),class: 'btn btn-primary'
+  .card
+    .container
+      = form_with model: @tweet, url:tweets_path, local: true do |f|
+        = render 'users/shared/error_messages', model: @tweet
+        %p
+        .form-group
+          = f.label :content
+          %br
+          = f.text_area :content, rows: 10, class: 'form-control'
+        = f.fields_for :image do |ff|
+          .form-group
+            = ff.label :image
+            %br
+            = ff.file_field :image
+        = f.submit 'ツイートする',class: 'btn btn-primary'
+        %p
 
   .media
     .media-body
@@ -24,8 +27,9 @@
       %br
       -if @user.biography.present?
         = @user.biography
-
-
+  %p
+  = link_to 'いいねのツイート', likes_user_path(current_user.id),class: 'btn btn-primary'
+  %p
   - unless current_user == @user
     - if current_user.following?(@user)
       = button_to 'フォロー中',follow_path(id: @user.id),method: :delete

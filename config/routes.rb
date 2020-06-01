@@ -11,15 +11,12 @@ Rails.application.routes.draw do
   }
   resources :users, only: [:show]
 
-  scope 'users' do
-    resources :tweets
-  end
-
   resources :users do
     member do
       get :likes
     end
   end
+  resources :tweets
   resources :follows, only: %i[create destroy]
 
   resources :retweets, only: %i[create destroy]
