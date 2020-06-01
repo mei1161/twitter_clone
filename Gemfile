@@ -69,3 +69,4 @@ gem 'activeadmin'
 gem 'font-awesome-rails'
 gem 'momentjs-rails'
 gem 'bootstrap4-datetime-picker-rails'
+gem 'rubocop', require: false

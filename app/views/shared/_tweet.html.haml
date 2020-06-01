@@ -9,7 +9,7 @@
         ="#{retweet_user}さんがRTしました"
     %h4{class: "card-title"}
       = tweet.user.screen_name
-    - if tweet.type == "TweetImage"
+    - if tweet.type == "TweetImage" 
       = image_tag tweet.image.image.to_s,style:"width:100%;margin: 0 auto;"
     
     %p{class: "card-text"}
@@ -31,13 +31,10 @@
 
 
 .collapse{id: "reply_form_#{tweet.id}"}
-  - reply_tweet = TweetImage.new(reply: tweet)
-  - reply_tweet.build_image
-  = form_with model: reply_tweet, url:tweets_path, local: true do |f|
+  = form_with model: @reply, url:reply_tweet_path(tweet.id), local: true do |f|
     = f.label :content
     %br
     = f.text_area :content, rows: 3
-    = f.hidden_field :reply_id
     %br
     = f.fields_for :image do |ff|
       = ff.label :image
