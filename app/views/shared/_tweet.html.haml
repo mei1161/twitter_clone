@@ -31,7 +31,6 @@
 
 .collapse{id: "reply_form_#{tweet.id}"}
   = form_with model: @reply, url:reply_tweet_path(tweet.id), local: true do |f|
-    = render 'users/shared/error_messages', model: @reply
     .form-group
       = f.label :content
       %br
