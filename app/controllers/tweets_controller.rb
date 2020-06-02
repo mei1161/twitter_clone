@@ -51,7 +51,8 @@ class TweetsController < ApplicationController
       @tweet.build_image
       @retweets = current_user.retweets
       @likes = current_user.likes
-
+      @reply = @reply.becomes(TweetImage)
+      @reply.build_image
       render 'users/show'
     end
   end
