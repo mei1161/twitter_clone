@@ -2,6 +2,7 @@
 
 class TweetsController < ApplicationController
   before_action :authenticate_user!
+  include Common
   def new
     @tweet = TweetImage.new
     @tweet.build_image
@@ -43,16 +44,13 @@ class TweetsController < ApplicationController
     @reply.reply_id = @tweet.id
     @reply.user = @user
     if @reply.save
-      pp @reply
       redirect_to user_path(current_user.screen_name)
     else
       @tweets = @user.tweets
       @tweet = @tweet.becomes(TweetImage)
       @tweet.build_image
-      @retweets = current_user.retweets
       @likes = current_user.likes
-      @reply = @reply.becomes(TweetImage)
-      @reply.build_image
+      get_tweets
       render 'users/show'
     end
   end
