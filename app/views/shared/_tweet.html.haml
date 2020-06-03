@@ -16,7 +16,7 @@
     .btn-group{role: "group"}
       %button.btn.btn-primary{"type": "button","data-toggle": "collapse", "data-target": "#reply_form_#{tweet.id}", "aria-expanded": "false", "aria-controls": "reply_form_#{tweet.id}"}
         リプライ
-      - unless tweet.likes.exists?(tweet_id: tweet.id)
+      - unless tweet.likes.exists?(user_id: current_user.id)
         = button_to "LGTM", likes_path(id: tweet.id), method: :post,class: 'btn btn-outline-primary',form: {style: 'display:inline-block;'}
       - else
         = button_to "LGTMを解除する", like_path(tweet.id), method: :delete,class: 'btn btn-primary',form: {style: 'display:inline-block;'}
@@ -31,7 +31,6 @@
 
 .collapse{id: "reply_form_#{tweet.id}"}
   = form_with model: @reply, url:reply_tweet_path(tweet.id), local: true do |f|
-    = render 'users/shared/error_messages', model: @reply
     .form-group
       = f.label :content
       %br

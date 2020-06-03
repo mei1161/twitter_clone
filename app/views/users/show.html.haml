@@ -32,10 +32,10 @@
   %p
   - unless current_user == @user
     - if current_user.following?(@user)
-      = button_to 'フォロー中',follow_path(id: @user.id),method: :delete
+      = button_to 'フォロー中',follow_path(id: @user.id),method: :delete, class: 'btn btn-secondary'
     - else
-      = button_to 'フォローする',follows_path(id: @user.id), method: :post
-    
+      = button_to 'フォローする',follows_path(id: @user.id), method: :post, class: 'btn btn-secondary'
+    %p
 
   - @tweets.reverse_each do |tweet|
     - if tweet.reply.present?
