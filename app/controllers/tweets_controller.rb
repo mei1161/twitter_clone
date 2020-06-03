@@ -18,6 +18,7 @@ class TweetsController < ApplicationController
 
     @tweet.user = @user
     if @tweet.save
+      pp @tweet
       redirect_to user_path(current_user.screen_name)
     else
       @tweets = @user.tweets
@@ -26,6 +27,32 @@ class TweetsController < ApplicationController
       @retweets = current_user.retweets
       @likes = current_user.likes
 
+      render 'users/show'
+    end
+  end
+
+  def reply
+    @user = current_user
+    @tweet = Tweet.find(params[:id])
+
+    @reply = if params[:tweet_image][:image_attributes].present?
+               TweetImage.new(tweet_image_params)
+             else
+               TweetText.new(tweet_text_params)
+             end
+    @reply.reply_id = @tweet.id
+    @reply.user = @user
+    if @reply.save
+      pp @reply
+      redirect_to user_path(current_user.screen_name)
+    else
+      @tweets = @user.tweets
+      @tweet = @tweet.becomes(TweetImage)
+      @tweet.build_image
+      @retweets = current_user.retweets
+      @likes = current_user.likes
+      @reply = @reply.becomes(TweetImage)
+      @reply.build_image
       render 'users/show'
     end
   end

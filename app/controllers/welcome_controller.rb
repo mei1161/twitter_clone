@@ -10,6 +10,8 @@ class WelcomeController < ApplicationController
     @retweets = current_user.retweets
     @tweet = TweetImage.new
     @tweet.build_image
+    @reply = TweetImage.new
+    @reply.build_image
   end
 
   def show; end
